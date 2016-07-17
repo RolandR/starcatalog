@@ -1,0 +1,77 @@
+<!doctype html>
+<html allowfullscreen>
+	<head>
+		<meta charset="utf-8" /> 
+		<title>
+			Star Catalog
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- No pinch zoom on mobile -->
+		<meta name="mobile-web-app-capable" content="yes"> <!-- Launch fullscreen when added to home screen -->
+		<meta name="apple-mobile-web-app-capable" content="yes"> <!-- Fullscreen Landscape on iOS -->
+		<link rel="stylesheet" type="text/css" media="all" href="./style.css" />
+	</head>
+	<body>
+		<div id="loading">
+			<span id="loadingText">Loading...</span>
+			<div id="loadingContainer">
+				<div id="loadingBar"></div>
+			</div>
+		</div>
+		<div id="controls">
+			<h1>Star Catalog</h1>
+			<span id="points">Loading...</span><br />
+			<h2>Catalogs</h2>
+			<table id="catalogsTable">
+				<tr>
+					<td><input type="checkbox" checked id="showHipparcos" onchange="catalogs.hipparcos = this.checked; imageLoader.process();" /></td>
+					<td><label for="showHipparcos">Hipparcos</label></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" checked id="showHD" onchange="catalogs.hd = this.checked; imageLoader.process();" /></td>
+					<td><label for="showHD">Henry Draper</label></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" checked id="showHarvard" onchange="catalogs.harvard = this.checked; imageLoader.process();" /></td>
+					<td><label for="showHarvard">Harvard Revised</label></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" checked id="showGliese" onchange="catalogs.gliese = this.checked; imageLoader.process();" /></td>
+					<td><label for="showGliese">Gliese</label></td>
+				</tr>
+			</table>
+			<div id="credits">
+				Code by <a href="http://rolandrytz.ch">Roland Rytz</a><br />
+				Data from the <a href="http://astronexus.com/hyg">HYG Database</a><br />
+			</div>
+		</div>
+		<div id="canvasContainer">
+			<canvas oncontextmenu="return false;" id="renderCanvas"></canvas>
+		</div>
+		<div id="debug"></div>
+
+		<script type="text/javascript" src="./pointRenderer/quaternion.js"></script>
+		<script type="text/javascript" src="./pointRenderer/matrix.js"></script>
+		
+		<script type="text/javascript" src="./pointRenderer/vertexshader.js"></script>
+		<script type="text/javascript" src="./pointRenderer/fragmentshader.js"></script>
+		<script type="text/javascript" src="./pointRenderer/pointrender.js"></script>
+		
+		
+		<script type="text/javascript" src="./aux.js"></script>
+		<script type="text/javascript" src="./render.js"></script>
+		<script type="text/javascript" src="./prepare.js"></script>
+	</body>		
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
