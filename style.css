@@ -140,6 +140,7 @@ h1{
 	border: 1px #555555 solid;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
 	overflow: hidden;
+	color: #000000;
 }
 
 #loadingText{

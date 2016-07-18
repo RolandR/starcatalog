@@ -122,7 +122,7 @@ function Renderer(){
 			objects[i*objectSize+2] = (points[i].y*yScale) / yDim;
 			objects[i*objectSize+1] = -(points[i].z*zScale) / zDim;
 
-			values[i] = (points[i].magnitude + 25)/100 + 3;
+			values[i] = (points[i].magnitude + 25)/100 + 2;
 
 			if(values[i] < 0){
 				values[i] = 1;
@@ -202,55 +202,11 @@ function Renderer(){
 		window.requestAnimationFrame(render);
 	}
 
-	function changeTransferImage(image, updateRenderer){
-
-		var colorMap = document.createElement('canvas');
-		var colorMapContext = colorMap.getContext('2d');
-		colorMap.width = 256;
-		colorMap.height = 1;
-		colorMapContext.drawImage(image, 0, 0);
-		var colorMapping = colorMapContext.getImageData(0, 0, 256, 1).data;
-		
-		//colors = new Uint8ClampedArray(colors.length);
-		
-		for(var a = 0; a < objects.length; a+=objectSize){
-			
-			colors[a  ] = colorMapping[~~(values[~~(a/objectSize)]*4)  ] / 255;
-			colors[a+1] = colorMapping[~~(values[~~(a/objectSize)]*4)+1] / 255;
-			colors[a+2] = colorMapping[~~(values[~~(a/objectSize)]*4)+2] / 255;
-			colors[a+3] = colorMapping[~~(values[~~(a/objectSize)]*4)+3] / 255;
-			//colors[a+3] = values[~~(a/objectSize)] / 255;
-			
-		}
-
-		if(updateRenderer){
-			glRenderer.setColors(colors);
-		}
-
-		return colors;
-	}
-
 	
 	return{
 		 addPoints: addPoints
-		,changeTransferImage: changeTransferImage
 	}
 }
-
-function changeTransferImage(file){
-	//console.log(file[0]);
-	file = window.URL.createObjectURL(file[0]);
-	var image = new Image();
-	image.src = file;
-
-	//console.log(colorMapping);
-	image.onload = function(){renderer.changeTransferImage(image, true)};
-}
-
-
-
-
-
 
 
 

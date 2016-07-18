@@ -23,22 +23,24 @@
 			<h2>Catalogs</h2>
 			<table id="catalogsTable">
 				<tr>
-					<td><input type="checkbox" checked id="showHipparcos" onchange="catalogs.hipparcos = this.checked; imageLoader.process();" /></td>
+					<td><input type="checkbox" checked id="showHipparcos" onchange="options.catalogs.hipparcos = this.checked; imageLoader.process();" /></td>
 					<td><label for="showHipparcos">Hipparcos</label></td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" checked id="showHD" onchange="catalogs.hd = this.checked; imageLoader.process();" /></td>
+					<td><input type="checkbox" checked id="showHD" onchange="options.catalogs.hd = this.checked; imageLoader.process();" /></td>
 					<td><label for="showHD">Henry Draper</label></td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" checked id="showHarvard" onchange="catalogs.harvard = this.checked; imageLoader.process();" /></td>
+					<td><input type="checkbox" checked id="showHarvard" onchange="options.catalogs.harvard = this.checked; imageLoader.process();" /></td>
 					<td><label for="showHarvard">Harvard Revised</label></td>
 				</tr>
 				<tr>
-					<td><input type="checkbox" checked id="showGliese" onchange="catalogs.gliese = this.checked; imageLoader.process();" /></td>
+					<td><input type="checkbox" checked id="showGliese" onchange="options.catalogs.gliese = this.checked; imageLoader.process();" /></td>
 					<td><label for="showGliese">Gliese</label></td>
 				</tr>
 			</table>
+			<input type="checkbox" id="useRelativeMagnitude" onchange="options.useRelativeMagnitude = this.checked; imageLoader.process();" />
+			<!--label for="useRelativeMagnitude">Use Relative Magnitude</label-->
 			<div id="credits">
 				Code by <a href="http://rolandrytz.ch">Roland Rytz</a><br />
 				Data from the <a href="http://astronexus.com/hyg">HYG Database</a><br />

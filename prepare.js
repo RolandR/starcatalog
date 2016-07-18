@@ -1,9 +1,12 @@
 
-var catalogs = {
-	 hipparcos: true
-	,hd: true
-	,harvard: true
-	,gliese: true
+var options = {
+	catalogs: {
+		 hipparcos: true
+		,hd: true
+		,harvard: true
+		,gliese: true
+	}
+	,useRelativeMagnitude: false
 }
 
 var vrDisplay;
@@ -97,14 +100,21 @@ function ImageLoader(){
 			var numbersIndex = i*28*4+ 0;
 
 			if(
-				(catalogs.hipparcos && numbers.getFloat32(numbersIndex+1*4, false) != 0) ||
-				(catalogs.hd && numbers.getFloat32(numbersIndex+2*4, false) != 0) ||
-				(catalogs.harvard && numbers.getFloat32(numbersIndex+3*4, false) != 0) ||
-				(catalogs.gliese && stringData[0] != "")
+				(options.catalogs.hipparcos && numbers.getFloat32(numbersIndex+1*4, false) != 0) ||
+				(options.catalogs.hd && numbers.getFloat32(numbersIndex+2*4, false) != 0) ||
+				(options.catalogs.harvard && numbers.getFloat32(numbersIndex+3*4, false) != 0) ||
+				(options.catalogs.gliese && stringData[0] != "")
 			){
+				var magnitude = 0;
+				
+				if(options.useRelativeMagnitude){
+					magnitude = numbers.getFloat32(numbersIndex+10*4, false);
+				} else {
+					magnitude = numbers.getFloat32(numbersIndex+11*4, false);
+				}
 
 				points.push({
-					 magnitude: numbers.getFloat32(numbersIndex+11*4, false)
+					 magnitude: magnitude
 					,colorIndex: numbers.getFloat32(numbersIndex+12*4, false)
 					,x: numbers.getFloat32(numbersIndex+13*4, false)
 					,y: numbers.getFloat32(numbersIndex+14*4, false)
