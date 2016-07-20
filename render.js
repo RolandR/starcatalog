@@ -1,3 +1,5 @@
+var autorotate = document.getElementById("autorotate").checked;
+
 function Renderer(){
 
 	var canvas = document.getElementById('renderCanvas');
@@ -21,15 +23,12 @@ function Renderer(){
 	var translateY = 0;
 	var translateZ = 0.2;
 
-	/*var moving = false;
+	var moving = false;
 	var panning = false;
 	var moveStartX = 0;
 	var moveStartY = 0;
 	var lastX = 0;
 	var lastY = 0;
-	var moveX = 0;
-	var moveY = 0;
-	var moveZ = 0;
 	var panX = 0;
 	var panY = 0;
 
@@ -44,8 +43,8 @@ function Renderer(){
 				panX += deltaX - lastX;
 				panY += deltaY - lastY;
 			} else if(moving){
-				moveX += deltaX - lastX;
-				moveZ += deltaY - lastY;
+				translateX += (deltaX - lastX)*0.0003;
+				translateY += (deltaY - lastY)*0.0003;
 			}
 			lastX = deltaX;
 			lastY = deltaY;
@@ -72,14 +71,14 @@ function Renderer(){
 		lastY = 0;
 		panX = 0;
 		panY = 0;
-	});*/
+	});
 
 	canvas.addEventListener('wheel', function(e) {
 		//console.log(e.deltaY);
 		if(e.shiftKey){
 			zoom += zoom * 0.001 * e.deltaX;
 		} else {
-			translateZ += e.deltaY * 0.001;
+			translateZ += e.deltaY * 0.0001;
 		}
 		return false;
 	});
@@ -104,7 +103,8 @@ function Renderer(){
 	var values;
 	var rendering = false;
 
-	var angle = 0;
+	var angleX = 0;
+	var angleY = 0;
 
 	var glRenderer = new PointRenderer("renderCanvas");
 	
@@ -142,14 +142,9 @@ function Renderer(){
 				colors[i*objectSize+2] = 1.0;
 			}
 
-
-			//if(orientation == "axial"){
-				//rotateY(i*objectSize, [Math.sin(Math.PI/2), Math.cos(Math.PI/2)], rotateCenter );
-			//}
 			
 		}
 
-		//changeTransferImage(colorImg);
 		
 		glRenderer.addVertices(objects, colors, values);
 
@@ -170,9 +165,13 @@ function Renderer(){
 			orientation = [-orientation[0], -orientation[1], orientation[2], orientation[3]];
 			rotationMatrix = matrix4FromQuaternion(orientation);
 		} else {
-			angle += 0.003;
-			var c = Math.cos(angle);
-			var s = Math.sin(angle);
+			if(autorotate && panX == 0 && panY == 0){
+				angleX += 0.001;
+			}
+			angleX += panX*0.0015;
+			panX = 0;
+			var c = Math.cos(angleX);
+			var s = Math.sin(angleX);
 			
 			rotationMatrix = [
 				c, 0, s, 0,
@@ -180,6 +179,20 @@ function Renderer(){
 				-s, 0, c, 0,
 				0,  0, 0, 1
 			];
+
+			angleY += panY*0.0015;
+			panY = 0;
+			var c = Math.cos(angleY);
+			var s = Math.sin(angleY);
+			
+			var yRotationMatrix = [
+				1, 0,  0, 0,
+				0, c, -s, 0,
+				0, s,  c, 0,
+				0, 0,  0, 1,
+			];
+
+			rotationMatrix = matrix4Multiply(rotationMatrix, yRotationMatrix);
 		}
 		
 		if(vrEnabled){
