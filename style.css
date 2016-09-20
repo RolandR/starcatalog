@@ -171,28 +171,28 @@ input[type="number"]{
 	height: 23px;
 }
 
-#catalogsTable{
+.settingsTable{
 	width: 100%;
 	border-collapse: collapse;
 }
 
-#catalogsTable td{
+.settingsTable td{
 	padding: 3px;
 }
 
-#catalogsTable td:first-child{
+.settingsTable td:first-child{
 	text-align: center;
 }
 
-#catalogsTable td>input{
+.settingsTable td>input{
 	vertical-align: middle;
 }
 
-#catalogsTable tr:nth-child(2n){
+.settingsTable tr:nth-child(2n){
 	background-color: #444444;
 }
 
-#catalogsTable tr:nth-child(2n+1){
+.settingsTable tr:nth-child(2n+1){
 	background-color: #555555;
 }
 

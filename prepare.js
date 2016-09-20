@@ -7,6 +7,7 @@ var options = {
 		,gliese: true
 	}
 	,useRelativeMagnitude: false
+	,onlyProperNames: false
 }
 
 var vrDisplay;
@@ -100,10 +101,12 @@ function ImageLoader(){
 			var numbersIndex = i*28*4+ 0;
 
 			if(
-				(options.catalogs.hipparcos && numbers.getFloat32(numbersIndex+1*4, false) != 0) ||
-				(options.catalogs.hd && numbers.getFloat32(numbersIndex+2*4, false) != 0) ||
-				(options.catalogs.harvard && numbers.getFloat32(numbersIndex+3*4, false) != 0) ||
-				(options.catalogs.gliese && stringData[0] != "")
+				(
+					(options.catalogs.hipparcos && numbers.getFloat32(numbersIndex+1*4, false) != 0) ||
+					(options.catalogs.hd && numbers.getFloat32(numbersIndex+2*4, false) != 0) ||
+					(options.catalogs.harvard && numbers.getFloat32(numbersIndex+3*4, false) != 0) ||
+					(options.catalogs.gliese && stringData[0] != "")
+				) && (!options.onlyProperNames || stringData[2] != "")
 			){
 				var magnitude = 0;
 				

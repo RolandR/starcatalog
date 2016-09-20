@@ -21,7 +21,7 @@
 			<h1>Star Catalog</h1>
 			<span id="points">Loading...</span><br />
 			<h2>Catalogs</h2>
-			<table id="catalogsTable">
+			<table class="settingsTable" id="catalogsTable">
 				<tr>
 					<td><input type="checkbox" checked id="showHipparcos" onchange="options.catalogs.hipparcos = this.checked; imageLoader.process();" /></td>
 					<td><label for="showHipparcos">Hipparcos</label></td>
@@ -39,10 +39,19 @@
 					<td><label for="showGliese">Gliese</label></td>
 				</tr>
 			</table>
+			<h2>More Options</h2>
+			<table class="settingsTable" id="optionsTable">
+				<tr>
+					<td><input type="checkbox" id="onlyProperNames" onchange="options.onlyProperNames = this.checked; imageLoader.process();" /></td>
+					<td><label for="onlyProperNames">Only named stars</label></td>
+				</tr>
+				<!--tr>
+					<td><input type="checkbox" id="useRelativeMagnitude" onchange="options.useRelativeMagnitude = this.checked; imageLoader.process();" /></td>
+					<td><label for="useRelativeMagnitude">Use Relative Magnitude</label></td>
+				</tr-->
+			</table>
 			<br />
 			<input type="checkbox" id="autorotate" checked onclick="autorotate = this.checked" /> <label for="autorotate">Auto-Rotate</label><br />
-			<!--input type="checkbox" id="useRelativeMagnitude" onchange="options.useRelativeMagnitude = this.checked; imageLoader.process();" />
-			<label for="useRelativeMagnitude">Use Relative Magnitude</label-->
 			<div id="credits">
 				Code by <a href="http://rolandrytz.ch">Roland Rytz</a><br />
 				Data from the <a href="http://astronexus.com/hyg">HYG Database</a><br />

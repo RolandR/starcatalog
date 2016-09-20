@@ -8,8 +8,8 @@ function Renderer(){
 
 		var pxRatio = window.devicePixelRatio || 1;
 		
-		canvas.width = ~~(canvasContainer.offsetWidth * pxRatio);
-		canvas.height = ~~(canvasContainer.offsetHeight * pxRatio);
+		canvas.width = ~~(canvasContainer.clientWidth * pxRatio);
+		canvas.height = ~~(canvasContainer.clientHeight * pxRatio);
 		
 		width = canvas.width;
 		height = canvas.height;		
@@ -196,7 +196,7 @@ function Renderer(){
 		}
 		
 		if(vrEnabled){
-			var translationMatrix = makeTranslationMatrix([translateX, translateY, translateZ + 0.6]);
+			var translationMatrix = makeTranslationMatrix([translateX, translateY, translateZ]);
 			var depth = 800;
 			var scaleMatrix = makeScaleMatrix([1/(canvas.width/2), 1/canvas.height, 1/depth]);
 			
